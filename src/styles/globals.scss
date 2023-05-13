@@ -1,0 +1,12 @@
+@use 'tailwindcss/base';
+@use 'tailwindcss/utilities';
+@use 'tailwindcss/components';
+@use 'sweetalert2/src/sweetalert2.scss';
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap');
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #ffffff;
+  font-family: 'Nunito', sans-serif;
+}
