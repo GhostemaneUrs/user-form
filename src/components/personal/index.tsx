@@ -1,3 +1,3 @@
 export const Personal = () => {
-  return <div>index</div>
+  return <div className='text-black'>personal</div>
 }

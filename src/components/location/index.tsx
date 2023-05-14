@@ -1,3 +1,3 @@
 export const Location = () => {
-  return <div>Location</div>
+  return <div className='text-black'>Location</div>
 }
