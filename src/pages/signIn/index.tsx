@@ -4,13 +4,13 @@ import { useEffect, useState } from 'react'
 import { useAuth } from '../../hooks/useAuth'
 import { useNavigate } from 'react-router-dom'
 import google from '../../assets/icons/google.svg'
-import { SignValues } from '../../types/userValues'
+import { UserValuesType } from '../../types/user'
 
 const SignIn = () => {
   const navigate = useNavigate()
   const { signIn, signInWithGoogle } = useAuth()
   const [isLoaded, setIsLoaded] = useState<boolean>(false)
-  const [valuesSignIn, setValuesSignIn] = useState<SignValues>({
+  const [valuesSignIn, setValuesSignIn] = useState<UserValuesType>({
     email: '',
     password: '',
     remember: false
@@ -64,7 +64,7 @@ const SignIn = () => {
       <div className='mb-4 sm:mb-6'>
         <h1 className='font-semibold text-black text-4xl'>Iniciar sesión</h1>
       </div>
-      <div className='b-4 xl:mb-8'>
+      <div className='mb-4 xl:mb-8'>
         <span
           className='w-full bg-gradient-to-t from-sky-blue-70 to-sky-blue-90 flex justify-center items-center text-white text-base py-[12px] px-8 pl-3 gap-4 rounded-full shadow-sky-buttons cursor-pointer'
           onClick={async () => {
