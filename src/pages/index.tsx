@@ -1,6 +1,6 @@
 import SignIn from './signIn'
 import SignUp from './signUp'
-import { Fragment, useEffect } from 'react'
+import { Fragment } from 'react'
 import Personal from './personalAccount'
 import { Layout } from '../components/layout'
 import {
