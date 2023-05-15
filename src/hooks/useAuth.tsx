@@ -1,5 +1,5 @@
 import { useContext } from 'react'
-import { UserContext } from '../context/user'
+import { UserContext } from '../context/auth'
 
 export const useAuth = () => {
   const {
@@ -7,6 +7,7 @@ export const useAuth = () => {
     signIn,
     signUp,
     logout,
+    loading,
     setUser,
     credentials,
     setCredentials,
@@ -17,6 +18,7 @@ export const useAuth = () => {
     signIn,
     signUp,
     logout,
+    loading,
     setUser,
     credentials,
     setCredentials,
