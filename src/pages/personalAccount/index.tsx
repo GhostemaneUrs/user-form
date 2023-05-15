@@ -1,32 +1,49 @@
-import { useState } from 'react'
+import { useEffect } from 'react'
+import { useStep } from '../../hooks/useStep'
+import { useAuth } from '../../hooks/useAuth'
 import { Account } from '../../components/account'
 import { Location } from '../../components/location'
 import { Personal } from '../../components/personal'
 import { Stepper, Step } from '@material-tailwind/react'
-import { HomeIcon, CogIcon, UserIcon } from '@heroicons/react/24/outline'
 
 const PersonalAccount = () => {
-  const [stepper, setStepper] = useState(0)
+  const { user } = useAuth()
+  const { steps, description, step } = useStep()
+
+  useEffect(() => {
+    step(Number(user?.step))
+  }, [user])
 
   return (
-    <main className='w-full h-full flex flex-col overflow-x-hidden items-center'>
-      <div className='flex flex-col xl:flex-row justify-center items-center w-full py-3 px-4 sm:pl-8 sm:pr-4 max-w-[1440px] gap-4 flex-1-auto m-0-auto'>
-        <div className='flex flex-col gap-4 w-full h-full'>
-          <Stepper activeStep={stepper}>
-            <Step onClick={() => setStepper(0)}>
-              <HomeIcon className='h-5 w-5' />
-            </Step>
-            <Step onClick={() => setStepper(1)}>
-              <UserIcon className='h-5 w-5' />
-            </Step>
-            <Step onClick={() => setStepper(2)}>
-              <CogIcon className='h-5 w-5' />
-            </Step>
-          </Stepper>
-          <div className='bg-white w-full border solid rounded-2xl p-4 flex '>
-            {stepper === 2 && <Location />}
-            {stepper === 1 && <Account />}
-            {stepper === 0 && <Personal />}
+    <main className='w-full max-w-[1440px] m-auto pl-4 h-full'>
+      <div className='h-[calc(100vh-160px)] md:h-[calc(100vh-150px)] pr-4 w-full flex isScroll overflow-x-hidden justify-between'>
+        <div className='flex flex-col xl:flex-row xl:justify-between w-full max-w-[1440px] gap-4 flex-1-auto m-0-auto'>
+          <div className='flex flex-col w-full h-full'>
+            <Stepper activeStep={steps} className='mb-3'>
+              <Step className='shadow-none cursor-pointer'>
+                <span className='material-icons'>person</span>
+              </Step>
+              <Step className='shadow-none cursor-pointer'>
+                <span className='material-icons'>mail</span>
+              </Step>
+              <Step className='shadow-none cursor-pointer'>
+                <span className='material-icons'>home</span>
+              </Step>
+            </Stepper>
+            <div className='w-full flex flex-col xl:flex-row h-full xl:justify-between gap-2 pb-4'>
+              <div
+                className={`bg-white w-full border solid rounded-2xl p-4 ${
+                  steps !== 2 ? 'xl:h-full' : 'h-full'
+                } flex xl:max-w-[750px]`}
+              >
+                {steps === 2 && <Location />}
+                {steps === 1 && <Account />}
+                {steps === 0 && <Personal />}
+              </div>
+              <div className='bg-white xl:max-w-[300px] h-max rounded-lg border solid w-full p-4 '>
+                <span>{description}</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>
