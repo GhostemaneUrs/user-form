@@ -37,7 +37,6 @@ export interface UserContextType {
   user: Record<string, unknown>
   credentials: Record<string, string>
   logout: () => Promise<void>
-  signInWithGoogle: () => Promise<UserCredential | void | Error>
   setUser: Dispatch<SetStateAction<Record<string, unknown>>>
   setCredentials: Dispatch<SetStateAction<Record<string, string>>>
   signUp: (

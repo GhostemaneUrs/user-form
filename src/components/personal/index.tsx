@@ -113,7 +113,7 @@ export const Personal = () => {
       documentNumber: user?.documentNumber ? String(user?.documentNumber) : ''
     })
     validateValues(values)
-  }, [user, isLoaded])
+  }, [user, isLoaded, values.namePhotoBack, values.namePhotoFront])
 
   useEffect(() => {
     setIsLoaded(true)

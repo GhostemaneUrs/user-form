@@ -10,8 +10,7 @@ export const useAuth = () => {
     loading,
     setUser,
     credentials,
-    setCredentials,
-    signInWithGoogle
+    setCredentials
   } = useContext(UserContext)
   return {
     user,
@@ -21,7 +20,6 @@ export const useAuth = () => {
     loading,
     setUser,
     credentials,
-    setCredentials,
-    signInWithGoogle
+    setCredentials
   }
 }

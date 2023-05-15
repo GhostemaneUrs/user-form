@@ -2,14 +2,12 @@ import { auth } from '../services/firebase'
 import { useState, createContext, useEffect } from 'react'
 import { UserContextType, UserProviderType } from '../types/user'
 import {
-  signInWithPopup,
-  GoogleAuthProvider,
   onAuthStateChanged,
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword
 } from 'firebase/auth'
 import { DocumentData } from 'firebase/firestore'
-import { getUser, saveUser, verifyExistUser } from '../utils/firebaseFunctions'
+import { getUser, saveUser } from '../utils/firebaseFunctions'
 
 export const UserContext = createContext<UserContextType>({
   user: {},
@@ -20,8 +18,7 @@ export const UserContext = createContext<UserContextType>({
   logout: async () => {},
   signUp: async () => {},
   signIn: async () => {},
-  setCredentials: () => {},
-  signInWithGoogle: async () => {}
+  setCredentials: () => {}
 })
 
 export const UserProvider = ({ children }: UserProviderType) => {
@@ -58,22 +55,10 @@ export const UserProvider = ({ children }: UserProviderType) => {
     return auth.signOut()
   }
 
-  const signInWithGoogle = async () => {
-    const googleProvider = new GoogleAuthProvider()
-    const currentUser = await signInWithPopup(auth, googleProvider)
-    if (!currentUser) return Error('No se pudo iniciar sesión')
-    const { user } = currentUser
-    verifyExistUser(user.uid).then(data => {
-      console.log('🚀 ~ file: auth.tsx:61 ~ verifyExistUser ~ data:', data)
-      if (!data) saveUser({ uid: user.uid })
-      else getUser(user.uid)
-    })
-  }
-
   useEffect(() => {
-    setLoading(true)
     const isValidUser = onAuthStateChanged(auth, user => {
       if (user) {
+        setLoading(true)
         getUser(user.uid).then(data => {
           if (data) {
             setUser(data)
@@ -81,7 +66,9 @@ export const UserProvider = ({ children }: UserProviderType) => {
           }
         })
         setCredentials(user)
-      } else setCredentials({})
+      } else {
+        setCredentials({})
+      }
     })
     return isValidUser
   }, [])
@@ -97,8 +84,7 @@ export const UserProvider = ({ children }: UserProviderType) => {
         loading,
         setLoading,
         credentials,
-        setCredentials,
-        signInWithGoogle
+        setCredentials
       }}
     >
       {children}

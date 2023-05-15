@@ -4,7 +4,8 @@ import { doc, getDoc, setDoc, updateDoc } from 'firebase/firestore'
 
 export const saveUser = async (user: User | any) => {
   await setDoc(doc(db, 'users', user.uid), {
-    uid: user.uid
+    uid: user.uid,
+    step: user.step
   })
 }
 
