@@ -9,19 +9,10 @@ import {
 } from '../components/protectedRoute'
 import { useAuth } from '../hooks/useAuth'
 import { Loading } from '../components/loading'
-import { Routes, Route, useLocation, useNavigate } from 'react-router-dom'
+import { Routes, Route } from 'react-router-dom'
 
 const AppRouter = () => {
   const { loading } = useAuth()
-  const location = useLocation()
-  const navigate = useNavigate()
-  const loggedOutRoutes = ['/sign-in']
-
-  useEffect(() => {
-    const { pathname } = location
-    const redirect = loggedOutRoutes.some(route => pathname.startsWith(route))
-    if (redirect || pathname === '/') navigate('/sign-in')
-  }, [])
 
   return (
     <Fragment>
@@ -29,7 +20,7 @@ const AppRouter = () => {
       <Layout>
         <Routes>
           <Route element={<ProtectedRouteAuth />}>
-            <Route path='/sign-in' element={<SignIn />} />
+            <Route path='/' element={<SignIn />} />
             <Route path='/sign-up' element={<SignUp />} />
           </Route>
           <Route element={<ProtectedRoute />}>

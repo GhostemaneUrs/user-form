@@ -87,7 +87,7 @@ const SignUp = () => {
               <span
                 className='text-sky-blue-70 cursor-pointer hover:text-sky-blue-80'
                 onClick={() => {
-                  navigate('/sign-in')
+                  navigate('/')
                 }}
               >
                 Iniciar sesión
