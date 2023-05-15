@@ -2,18 +2,26 @@ import { UserCredential } from 'firebase/auth'
 import { Dispatch, SetStateAction } from 'react'
 
 export interface User {
-  uid: string
+  uid?: string
+  step?: number
+  email?: string
   name?: string
   phone?: string
   gender?: string
   country?: string
   address?: string
+  password?: string
   zipCode?: string
   lastName?: string
   cellphone?: string
   birthDate?: string
+  urlPhotoBack?: string
   documentType?: string
+  urlPhotoFront?: string
   documentNumber?: string
+  namePhotoBack?: string
+  namePhotoFront?: string
+  confirmPassword?: string
 }
 
 export interface UserValuesType {
@@ -24,6 +32,8 @@ export interface UserValuesType {
 }
 
 export interface UserContextType {
+  loading: boolean
+  setLoading: Dispatch<SetStateAction<boolean>>
   user: Record<string, unknown>
   credentials: Record<string, string>
   logout: () => Promise<void>
