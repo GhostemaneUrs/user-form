@@ -1,4 +1,5 @@
 import { getAuth } from 'firebase/auth'
+import { getStorage } from 'firebase/storage'
 import { getFirestore } from 'firebase/firestore'
 import { FirebaseOptions, initializeApp } from 'firebase/app'
 
@@ -15,3 +16,4 @@ const firebaseConfig: FirebaseOptions = {
 export const firebase = initializeApp(firebaseConfig)
 export const auth = getAuth(firebase)
 export const db = getFirestore(firebase)
+export const storage = getStorage(firebase)
